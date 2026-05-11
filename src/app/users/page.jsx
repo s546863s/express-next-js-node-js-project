@@ -1,17 +1,22 @@
-import React from 'react';
+import UserList from '@/Components/userList/UserList';
+import React, { Suspense } from 'react';
 
 const getUsers = async () =>{
-    const res = await fetch('');
+    const res = await fetch('http://localhost:8000/users');
     return res.json();
 }
 
 const UsersPage = async () => {
-    const usersPromise = await getUsers()
+    const usersPromise =  getUsers()
+     
 
 
     return (
         <div>
-            <h1>Users inside  Users List {} .</h1>
+            <h1>Users2: with suspense {} .</h1>
+            <Suspense fallback={<div>Loading.......</div>} >
+            <UserList usersPromise={usersPromise} />
+            </Suspense>
         </div>
     );
 };
